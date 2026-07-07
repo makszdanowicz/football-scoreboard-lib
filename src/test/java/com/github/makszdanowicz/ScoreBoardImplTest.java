@@ -7,13 +7,13 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ScoreBoardImpTest {
+public class ScoreBoardImplTest {
 
     private ScoreBoard scoreBoard;
 
     @BeforeEach
     void setUp() {
-        scoreBoard = new ScoreBoardImp();
+        scoreBoard = new ScoreBoardImpl();
     }
 
     @Test
@@ -78,12 +78,13 @@ public class ScoreBoardImpTest {
     @Test
     void shouldThrowExceptionWhenUpdatingScoreOfNonExistentMatch() {
         // given
-        String notExistTeamName = "notExist";
-        MatchId matchId = new MatchId(notExistTeamName, notExistTeamName);
+        String notExistHomeName = "notExist1";
+        String notExistGuestName = "notExist2";
+        MatchId matchId = new MatchId(notExistHomeName, notExistGuestName);
 
         // when + then
         assertThrows(IllegalArgumentException.class,
-                () -> scoreBoard.updateScore(notExistTeamName, notExistTeamName, 1, 1));
+                () -> scoreBoard.updateScore(notExistHomeName, notExistGuestName, 1, 1));
     }
 
     @Test

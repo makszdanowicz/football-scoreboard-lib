@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-public class ScoreBoardImp implements ScoreBoard{
+public class ScoreBoardImpl implements ScoreBoard{
 
     private final Map<MatchId, Match> activeMatches = new HashMap<>();
     private final Set<String> teamsInPlay = new HashSet<>();
