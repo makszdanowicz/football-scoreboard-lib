@@ -42,7 +42,7 @@ public class ScoreBoardImp implements ScoreBoard{
         Match removedMatch = activeMatches.remove(matchId);
         if (removedMatch != null) {
             teamsInPlay.remove(homeTeam.toLowerCase());
-            teamsInPlay.remove(homeTeam.toLowerCase());
+            teamsInPlay.remove(guestTeam.toLowerCase());
         } else {
             throw new IllegalArgumentException("Match not found");
         }
