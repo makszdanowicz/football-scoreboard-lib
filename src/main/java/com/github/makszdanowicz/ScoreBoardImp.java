@@ -57,4 +57,9 @@ public class ScoreBoardImp implements ScoreBoard{
                 .toList();
 
     }
+
+    @Override
+    public List<Match> getFinishedMatches() {
+        return List.of();
+    }
 }

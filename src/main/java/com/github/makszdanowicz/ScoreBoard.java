@@ -7,4 +7,5 @@ public interface ScoreBoard {
     void updateScore(String homeTeam, String guestTeam, int homeScore, int guestScore);
     void finishMatch(String homeTeam, String guestTeam);
     List<Match> getSummaryOfMatchesInProgress();
+    List<Match> getFinishedMatches();
 }

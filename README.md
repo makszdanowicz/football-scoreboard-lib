@@ -11,8 +11,8 @@ The library implements the following core operations:
 * **Update the score:** Allows updating the score with absolute, non-negative integer values.
 * **Finish a match:** Removes the match from the active scoreboard.
 * **Get a summary:** Returns all ongoing matches ordered by total score (descending). In case of a tie, the most recently started match is listed first (resolved internally via an exact insertion sequence order).
-* **[PLACEHOLDER - Custom Feature]:** *(Describe your 5th feature here later)*
-
+* **Get Finished Matches (Custom Feature):** Retrieves a list of matches that have been finished.
+    * *Reasoning:* In real-world sports data platforms, matches do not simply vanish after the final whistle. Retaining historical matches is crucial for downstream processing, such as post-match reporting, statistical analysis, and settling betting markets. This feature introduces an archive for completed games.
 ---
 
 ## Business Assumptions (v1.0 - Initial Design)

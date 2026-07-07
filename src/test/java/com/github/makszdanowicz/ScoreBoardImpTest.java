@@ -160,4 +160,25 @@ public class ScoreBoardImpTest {
         assertEquals(m5, summary.get(3).id());
         assertEquals(m3, summary.get(4).id());
     }
+
+    @Test
+    void shouldReturnFinishedMatches() {
+        // given
+        ScoreBoard scoreBoard = new ScoreBoardImp();
+        String homeTeam = "Poland", guestTeam = "Sweden";
+        scoreBoard.startNewMatch(homeTeam, guestTeam);
+        scoreBoard.updateScore(homeTeam, guestTeam, 2, 1);
+
+        // when
+        scoreBoard.finishMatch(homeTeam, guestTeam);
+
+        // then
+        List<Match> finishedMatches = scoreBoard.getFinishedMatches();
+        assertEquals(1, finishedMatches.size());
+        assertEquals(homeTeam, finishedMatches.getFirst().id().homeTeam());
+        assertEquals(2, finishedMatches.getFirst().homeScore());
+        assertEquals(guestTeam, finishedMatches.getFirst().id().guestTeam());
+        assertEquals(1, finishedMatches.getFirst().guestScore());
+        assertTrue(scoreBoard.getSummaryOfMatchesInProgress().isEmpty());
+    }
 }
