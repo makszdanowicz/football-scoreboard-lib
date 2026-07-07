@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ScoreBoardImpTest {
 
@@ -25,5 +26,18 @@ public class ScoreBoardImpTest {
         assertEquals(guestTeam, matches.getFirst().id().guestTeam());
         assertEquals(0, matches.getFirst().homeScore());
         assertEquals(0, matches.getFirst().guestScore());
+    }
+
+    @Test
+    void shouldThrowExceptionWhenTeamIsAlreadyPlaying() {
+        // given
+        ScoreBoard scoreBoard = new ScoreBoardImp();
+        String homeTeam = "Mexico";
+        String firstOpponent = "Canada";
+        String secondOpponent = "Brazil";
+        scoreBoard.startNewMatch(homeTeam, firstOpponent);
+
+        // when + then
+        assertThrows(IllegalStateException.class, () -> scoreBoard.startNewMatch(homeTeam, secondOpponent));
     }
 }
