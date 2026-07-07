@@ -47,6 +47,15 @@ public class ScoreBoardImpTest {
     }
 
     @Test
+    void shouldThrowExceptionWhenTeamPlaysAgainstItself() {
+        // when + then
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> scoreBoard.startNewMatch("Mexico", "Mexico")
+        );
+    }
+
+    @Test
     void shouldUpdateScore() {
         // given
         String homeTeam = "Mexico";
