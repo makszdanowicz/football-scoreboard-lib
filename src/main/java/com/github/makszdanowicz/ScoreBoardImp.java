@@ -5,14 +5,24 @@ import java.util.*;
 public class ScoreBoardImp implements ScoreBoard{
 
     private final Map<MatchId, Match> activeMatches = new HashMap<>();
-
+    private final Set<String> teamsInPlay = new HashSet<>();
     private long sequence = 0;
 
     @Override
     public void startNewMatch(String homeTeam, String guestTeam) {
+        // Standardizing names to lowercase for safe comparison
+        String normalizedHomeTeam = homeTeam.toLowerCase();
+        String normalizedGuestTeam = guestTeam.toLowerCase();
+
+        if (teamsInPlay.contains(normalizedGuestTeam) || teamsInPlay.contains(normalizedHomeTeam)) {
+            throw new IllegalStateException("One or both teams are already playing a match");
+        }
+
         MatchId matchId = new MatchId(homeTeam, guestTeam);
         Match match = new Match(matchId, sequence++);
         activeMatches.put(matchId, match);
+        teamsInPlay.add(normalizedHomeTeam);
+        teamsInPlay.add(normalizedGuestTeam);
     }
 
     @Override
