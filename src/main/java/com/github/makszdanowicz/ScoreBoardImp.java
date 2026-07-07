@@ -38,7 +38,10 @@ public class ScoreBoardImp implements ScoreBoard{
 
     @Override
     public void finishMatch(String homeTeam, String guestTeam) {
-
+        MatchId matchId = new MatchId(homeTeam, guestTeam);
+        activeMatches.remove(matchId);
+        teamsInPlay.remove(homeTeam.toLowerCase());
+        teamsInPlay.remove(homeTeam.toLowerCase());
     }
 
 
