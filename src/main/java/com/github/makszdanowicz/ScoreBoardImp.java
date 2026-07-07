@@ -26,6 +26,11 @@ public class ScoreBoardImp implements ScoreBoard{
     }
 
     @Override
+    public void updateScore(MatchId id, int homeScore, int guestScore) {
+
+    }
+
+    @Override
     public List<Match> getSummaryOfMatchesInProgress() {
         return new ArrayList<>(activeMatches.values());
     }

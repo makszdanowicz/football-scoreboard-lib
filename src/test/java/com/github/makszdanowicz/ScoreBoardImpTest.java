@@ -40,4 +40,26 @@ public class ScoreBoardImpTest {
         // when + then
         assertThrows(IllegalStateException.class, () -> scoreBoard.startNewMatch(homeTeam, secondOpponent));
     }
+
+    @Test
+    void shouldUpdateScore() {
+        // given
+        ScoreBoard scoreBoard = new ScoreBoardImp();
+        String homeTeam = "Mexico";
+        String guestTeam = "Canada";
+        scoreBoard.startNewMatch(homeTeam, guestTeam);
+        Match existingMatch = scoreBoard.getSummaryOfMatchesInProgress().getFirst();
+        int newHomeScore = 1, newGuestScore = 0;
+
+        // when
+        scoreBoard.updateScore(existingMatch.id(), newHomeScore, newGuestScore);
+
+        // then
+        List<Match> matches = scoreBoard.getSummaryOfMatchesInProgress();
+        assertEquals(1, matches.size());
+        assertEquals(homeTeam, matches.getFirst().id().homeTeam());
+        assertEquals(guestTeam, matches.getFirst().id().guestTeam());
+        assertEquals(newHomeScore, matches.getFirst().homeScore());
+        assertEquals(newGuestScore, matches.getFirst().guestScore());
+    }
 }
