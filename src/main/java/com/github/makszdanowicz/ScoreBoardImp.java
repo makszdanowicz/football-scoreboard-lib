@@ -51,6 +51,10 @@ public class ScoreBoardImp implements ScoreBoard{
 
     @Override
     public List<Match> getSummaryOfMatchesInProgress() {
-        return new ArrayList<>(activeMatches.values());
+        return activeMatches.values().stream()
+                .sorted(Comparator.comparingInt(Match::getTotalScore).reversed()
+                        .thenComparing(Match::insertionOrder, Comparator.reverseOrder()))
+                .toList();
+
     }
 }
