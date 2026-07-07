@@ -30,8 +30,9 @@ Before implementing the code, the following domain rules and constraints were es
 
 ### Prerequisites
 * Java 21 or higher
-* Apache Maven 3.8+
 * Git
+
+> **Note:** Apache Maven does not need to be installed separately — this project uses the Maven Wrapper (`mvnw`), which automatically downloads the correct Maven version.
 
 ### Installation and Testing
 To clone the repository and run the test suite, execute the following commands in your terminal:
@@ -41,13 +42,20 @@ To clone the repository and run the test suite, execute the following commands i
 git clone git@github.com:makszdanowicz/football-scoreboard-lib.git
 
 # Navigate into the project directory
-cd scoreboard-library
+cd football-scoreboard-lib
 
 # Clean the project and run all unit tests
-mvn clean test
+./mvnw clean test
 
-# Build the project package (JAR file)
-mvn clean install
+# Build the project package and install it to your local Maven repository
+./mvnw clean install
+```
+
+On Windows (Command Prompt / PowerShell), use `mvnw.cmd` instead of `./mvnw`:
+
+```bash
+mvnw.cmd clean test
+mvnw.cmd clean install
 ```
 
 ### Usage Example
