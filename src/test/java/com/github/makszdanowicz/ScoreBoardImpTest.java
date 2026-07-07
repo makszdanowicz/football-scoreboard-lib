@@ -1,5 +1,6 @@
 package com.github.makszdanowicz;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -8,10 +9,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ScoreBoardImpTest {
 
+    private ScoreBoard scoreBoard;
+
+    @BeforeEach
+    void setUp() {
+        scoreBoard = new ScoreBoardImp();
+    }
+
     @Test
     void shouldStartNewMatchWithZeroScope() {
         // given
-        ScoreBoard scoreBoard = new ScoreBoardImp();
         String homeTeam = "Mexico";
         String guestTeam = "Canada";
 
@@ -30,7 +37,6 @@ public class ScoreBoardImpTest {
     @Test
     void shouldThrowExceptionWhenTeamIsAlreadyPlaying() {
         // given
-        ScoreBoard scoreBoard = new ScoreBoardImp();
         String homeTeam = "Mexico";
         String firstOpponent = "Canada";
         String secondOpponent = "Brazil";
@@ -43,7 +49,6 @@ public class ScoreBoardImpTest {
     @Test
     void shouldUpdateScore() {
         // given
-        ScoreBoard scoreBoard = new ScoreBoardImp();
         String homeTeam = "Mexico";
         String guestTeam = "Canada";
         scoreBoard.startNewMatch(homeTeam, guestTeam);
@@ -64,7 +69,6 @@ public class ScoreBoardImpTest {
     @Test
     void shouldThrowExceptionWhenUpdatingScoreOfNonExistentMatch() {
         // given
-        ScoreBoard scoreBoard = new ScoreBoardImp();
         String notExistTeamName = "notExist";
         MatchId matchId = new MatchId(notExistTeamName, notExistTeamName);
 
@@ -76,7 +80,6 @@ public class ScoreBoardImpTest {
     @Test
     void shouldThrowExceptionWhenScoreIsNegative() {
         // given
-        ScoreBoard scoreBoard = new ScoreBoardImp();
         String homeTeam = "Mexico";
         String guestTeam = "Canada";
         scoreBoard.startNewMatch(homeTeam, guestTeam);
@@ -91,7 +94,6 @@ public class ScoreBoardImpTest {
     @Test
     void shouldFinishMatch() {
         // given
-        ScoreBoard scoreBoard = new ScoreBoardImp();
         String homeTeam = "Mexico";
         String guestTeam = "Canada";
         scoreBoard.startNewMatch(homeTeam, guestTeam);
@@ -107,7 +109,6 @@ public class ScoreBoardImpTest {
     @Test
     void shouldThrowExceptionWhenFinishingNonExistentMatch() {
         // given
-        ScoreBoard scoreBoard = new ScoreBoardImp();
         String notExistingTeam = "notExist";
 
         // when + then
@@ -117,9 +118,6 @@ public class ScoreBoardImpTest {
 
     @Test
     void shouldReturnEmptySummaryWhenNoMatchesInProgress() {
-        // given
-        ScoreBoard scoreBoard = new ScoreBoardImp();
-
         // when
         List<Match> summary = scoreBoard.getSummaryOfMatchesInProgress();
 
@@ -130,7 +128,6 @@ public class ScoreBoardImpTest {
     @Test
     void shouldReturnSummaryOrderedByTotalScoreAndInsertionOrder() {
         // given
-        ScoreBoard scoreBoard = new ScoreBoardImp();
         MatchId m1 = new MatchId("Mexico", "Canada");
         MatchId m2 = new MatchId("Spain", "Brazil");
         MatchId m3 = new MatchId("Germany", "France");
@@ -164,7 +161,6 @@ public class ScoreBoardImpTest {
     @Test
     void shouldReturnFinishedMatches() {
         // given
-        ScoreBoard scoreBoard = new ScoreBoardImp();
         String homeTeam = "Poland", guestTeam = "Sweden";
         scoreBoard.startNewMatch(homeTeam, guestTeam);
         scoreBoard.updateScore(homeTeam, guestTeam, 2, 1);
