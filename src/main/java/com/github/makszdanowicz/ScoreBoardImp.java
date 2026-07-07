@@ -27,7 +27,9 @@ public class ScoreBoardImp implements ScoreBoard{
 
     @Override
     public void updateScore(MatchId id, int homeScore, int guestScore) {
-
+        Match currentMatch = activeMatches.get(id);
+        Match updatedMatch = new Match(currentMatch.id(), homeScore, guestScore, currentMatch.insertionOrder());
+        activeMatches.put(id, updatedMatch);
     }
 
     @Override

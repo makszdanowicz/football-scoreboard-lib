@@ -57,8 +57,7 @@ public class ScoreBoardImpTest {
         // then
         List<Match> matches = scoreBoard.getSummaryOfMatchesInProgress();
         assertEquals(1, matches.size());
-        assertEquals(homeTeam, matches.getFirst().id().homeTeam());
-        assertEquals(guestTeam, matches.getFirst().id().guestTeam());
+        assertEquals(existingMatch.id(), matches.getFirst().id());
         assertEquals(newHomeScore, matches.getFirst().homeScore());
         assertEquals(newGuestScore, matches.getFirst().guestScore());
     }
