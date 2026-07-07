@@ -53,7 +53,49 @@ mvn clean install
 ### Usage Example
 
 Below is a simple demonstration of how to integrate and use the Scoreboard library in a Java application.
+
 ```java
-    // TODO
+import com.github.makszdanowicz.ScoreBoard;
+import com.github.makszdanowicz.ScoreBoardImp;
+import com.github.makszdanowicz.Match;
+
+import java.util.List;
+
+public class ScoreBoardDemo {
+    public static void main(String[] args) {
+        // 1. Initialize the scoreboard
+        ScoreBoard scoreBoard = new ScoreBoardImp();
+
+        // 2. Start new matches
+        scoreBoard.startNewMatch("Mexico", "Canada");
+        scoreBoard.startNewMatch("Spain", "Brazil");
+        scoreBoard.startNewMatch("Germany", "France");
+
+        // 3. Update scores (using exact new scores)
+        scoreBoard.updateScore("Mexico", "Canada", 0, 5);
+        scoreBoard.updateScore("Spain", "Brazil", 10, 2);
+        scoreBoard.updateScore("Germany", "France", 2, 2);
+
+        // 4. Retrieve and display the summary of ongoing matches
+        // Expected order: Spain-Brazil (12), Mexico-Canada (5), Germany-France (4)
+        System.out.println("--- Matches In Progress ---");
+        List<Match> inProgress = scoreBoard.getSummaryOfMatchesInProgress();
+        inProgress.forEach(match -> System.out.println(
+            match.id().homeTeam() + " " + match.homeScore() + " - " +
+            match.guestScore() + " " + match.id().guestTeam()
+        ));
+
+        // 5. Finish a match (removes it from active, adds to finished)
+        scoreBoard.finishMatch("Mexico", "Canada");
+
+        // 6. Retrieve the historical archive (Custom Feature)
+        System.out.println("\n--- Finished Matches Archive ---");
+        List<Match> finishedMatches = scoreBoard.getFinishedMatches();
+        finishedMatches.forEach(match -> System.out.println(
+            match.id().homeTeam() + " vs " + match.id().guestTeam() + 
+            " ended with final score " + match.homeScore() + "-" + match.guestScore()
+        ));
+    }
+}
 ```
 

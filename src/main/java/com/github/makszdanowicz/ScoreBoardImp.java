@@ -6,6 +6,7 @@ public class ScoreBoardImp implements ScoreBoard{
 
     private final Map<MatchId, Match> activeMatches = new HashMap<>();
     private final Set<String> teamsInPlay = new HashSet<>();
+    private final List<Match> finishedMatches = new ArrayList<>();
     private long sequence = 0;
 
     @Override
@@ -43,6 +44,7 @@ public class ScoreBoardImp implements ScoreBoard{
         if (removedMatch != null) {
             teamsInPlay.remove(homeTeam.toLowerCase());
             teamsInPlay.remove(guestTeam.toLowerCase());
+            finishedMatches.add(removedMatch);
         } else {
             throw new IllegalArgumentException("Match not found");
         }
@@ -60,6 +62,6 @@ public class ScoreBoardImp implements ScoreBoard{
 
     @Override
     public List<Match> getFinishedMatches() {
-        return List.of();
+        return List.copyOf(finishedMatches);
     }
 }
