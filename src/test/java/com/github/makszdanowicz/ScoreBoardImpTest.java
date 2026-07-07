@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ScoreBoardImpTest {
 
@@ -85,5 +84,21 @@ public class ScoreBoardImpTest {
         // when + then
         assertThrows(IllegalArgumentException.class,
                 () -> scoreBoard.updateScore(existingMatch.id(), newHomeScore, newGuestScore));
+    }
+
+    @Test
+    void shouldFinishMatch() {
+        // given
+        ScoreBoard scoreBoard = new ScoreBoardImp();
+        String homeTeam = "Mexico";
+        String guestTeam = "Canada";
+        scoreBoard.startNewMatch(homeTeam, guestTeam);
+        Match existingMatch = scoreBoard.getSummaryOfMatchesInProgress().getFirst();
+
+        // when
+        scoreBoard.finishMatch(existingMatch.id());
+
+        // then
+        assertTrue(scoreBoard.getSummaryOfMatchesInProgress().isEmpty());
     }
 }
