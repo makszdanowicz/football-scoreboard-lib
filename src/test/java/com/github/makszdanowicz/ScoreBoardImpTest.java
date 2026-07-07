@@ -62,7 +62,7 @@ public class ScoreBoardImpTest {
     }
 
     @Test
-    void shouldThrowExceptionWhenMatchNotExist() {
+    void shouldThrowExceptionWhenUpdatingScoreOfNonExistentMatch() {
         // given
         ScoreBoard scoreBoard = new ScoreBoardImp();
         String notExistTeamName = "notExist";
@@ -102,5 +102,16 @@ public class ScoreBoardImpTest {
 
         // then
         assertTrue(scoreBoard.getSummaryOfMatchesInProgress().isEmpty());
+    }
+
+    @Test
+    void shouldThrowExceptionWhenFinishingNonExistentMatch() {
+        // given
+        ScoreBoard scoreBoard = new ScoreBoardImp();
+        String notExistingTeam = "notExist";
+
+        // when + then
+        assertThrows(IllegalArgumentException.class,
+                () -> scoreBoard.finishMatch(notExistingTeam, notExistingTeam));
     }
 }
