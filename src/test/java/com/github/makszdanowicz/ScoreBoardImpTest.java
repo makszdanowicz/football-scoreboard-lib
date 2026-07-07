@@ -61,4 +61,14 @@ public class ScoreBoardImpTest {
         assertEquals(newHomeScore, matches.getFirst().homeScore());
         assertEquals(newGuestScore, matches.getFirst().guestScore());
     }
+
+    @Test
+    void shouldThrowExceptionWhenMatchNotExist() {
+        // given
+        ScoreBoard scoreBoard = new ScoreBoardImp();
+        MatchId matchId = new MatchId("notExist", "notExist");
+
+        // when + then
+        assertThrows(IllegalArgumentException.class, () -> scoreBoard.updateScore(matchId, 1, 1));
+    }
 }
