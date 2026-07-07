@@ -26,19 +26,21 @@ public class ScoreBoardImp implements ScoreBoard{
     }
 
     @Override
-    public void updateScore(MatchId id, int homeScore, int guestScore) {
-        Match currentMatch = activeMatches.get(id);
+    public void updateScore(String homeTeam, String guestTeam, int homeScore, int guestScore) {
+        MatchId matchId = new MatchId(homeTeam, guestTeam);
+        Match currentMatch = activeMatches.get(matchId);
         if (currentMatch == null) {
             throw new IllegalArgumentException("Match not found");
         }
         Match updatedMatch = new Match(currentMatch.id(), homeScore, guestScore, currentMatch.insertionOrder());
-        activeMatches.put(id, updatedMatch);
+        activeMatches.put(matchId, updatedMatch);
     }
 
     @Override
-    public void finishMatch(MatchId id) {
+    public void finishMatch(String homeTeam, String guestTeam) {
 
     }
+
 
     @Override
     public List<Match> getSummaryOfMatchesInProgress() {

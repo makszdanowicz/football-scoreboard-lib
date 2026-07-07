@@ -51,7 +51,7 @@ public class ScoreBoardImpTest {
         int newHomeScore = 1, newGuestScore = 0;
 
         // when
-        scoreBoard.updateScore(existingMatch.id(), newHomeScore, newGuestScore);
+        scoreBoard.updateScore(homeTeam, guestTeam, newHomeScore, newGuestScore);
 
         // then
         List<Match> matches = scoreBoard.getSummaryOfMatchesInProgress();
@@ -65,10 +65,12 @@ public class ScoreBoardImpTest {
     void shouldThrowExceptionWhenMatchNotExist() {
         // given
         ScoreBoard scoreBoard = new ScoreBoardImp();
-        MatchId matchId = new MatchId("notExist", "notExist");
+        String notExistTeamName = "notExist";
+        MatchId matchId = new MatchId(notExistTeamName, notExistTeamName);
 
         // when + then
-        assertThrows(IllegalArgumentException.class, () -> scoreBoard.updateScore(matchId, 1, 1));
+        assertThrows(IllegalArgumentException.class,
+                () -> scoreBoard.updateScore(notExistTeamName, notExistTeamName, 1, 1));
     }
 
     @Test
@@ -83,7 +85,7 @@ public class ScoreBoardImpTest {
 
         // when + then
         assertThrows(IllegalArgumentException.class,
-                () -> scoreBoard.updateScore(existingMatch.id(), newHomeScore, newGuestScore));
+                () -> scoreBoard.updateScore(homeTeam, guestTeam, newHomeScore, newGuestScore));
     }
 
     @Test
@@ -96,7 +98,7 @@ public class ScoreBoardImpTest {
         Match existingMatch = scoreBoard.getSummaryOfMatchesInProgress().getFirst();
 
         // when
-        scoreBoard.finishMatch(existingMatch.id());
+        scoreBoard.finishMatch(homeTeam, guestTeam);
 
         // then
         assertTrue(scoreBoard.getSummaryOfMatchesInProgress().isEmpty());
