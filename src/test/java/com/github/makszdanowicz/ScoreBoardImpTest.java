@@ -71,4 +71,19 @@ public class ScoreBoardImpTest {
         // when + then
         assertThrows(IllegalArgumentException.class, () -> scoreBoard.updateScore(matchId, 1, 1));
     }
+
+    @Test
+    void shouldThrowExceptionWhenScoreIsNegative() {
+        // given
+        ScoreBoard scoreBoard = new ScoreBoardImp();
+        String homeTeam = "Mexico";
+        String guestTeam = "Canada";
+        scoreBoard.startNewMatch(homeTeam, guestTeam);
+        Match existingMatch = scoreBoard.getSummaryOfMatchesInProgress().getFirst();
+        int newHomeScore = 0, newGuestScore = -1;
+
+        // when + then
+        assertThrows(IllegalArgumentException.class,
+                () -> scoreBoard.updateScore(existingMatch.id(), newHomeScore, newGuestScore));
+    }
 }
