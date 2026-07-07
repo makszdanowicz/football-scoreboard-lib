@@ -1,16 +1,22 @@
 package com.github.makszdanowicz;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class ScoreBoardImp implements ScoreBoard{
+
+    private final Map<MatchId, Match> activeMatches = new HashMap<>();
+
+    private long sequence = 0;
+
     @Override
     public void startNewMatch(String homeTeam, String guestTeam) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        MatchId matchId = new MatchId(homeTeam, guestTeam);
+        Match match = new Match(matchId, sequence++);
+        activeMatches.put(matchId, match);
     }
 
     @Override
     public List<Match> getSummaryOfMatchesInProgress() {
-        return Collections.emptyList();
+        return new ArrayList<>(activeMatches.values());
     }
 }
